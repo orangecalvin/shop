@@ -15,7 +15,7 @@ function SubPage(props) {
 
 
   return (
-    
+
         <div className="container">
 
           <YellowBtn bg="blue">버튼</YellowBtn>
@@ -32,7 +32,10 @@ function SubPage(props) {
               <button className="btn btn-danger">주문하기</button>
             </div>
           </div>
-        </div>
+          </div>
+      
   )
 }
+
+
 export { SubPage }
