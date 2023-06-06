@@ -12,7 +12,7 @@ let YellowBtn = styled.button`
 function SubPage(props) {
 
   let {id} = useParams();
-
+// 테스트  zzzzz
 
   return (
 
