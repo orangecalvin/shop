@@ -1,4 +1,12 @@
 import { useParams } from "react-router-dom"
+import styled from 'styled-components'
+
+let YellowBtn = styled.button`
+  background : ${ props => props.bg };
+  color :  ${ props => props.bg == 'blue' ? 'white' : 'black' };
+  padding : 10px;
+`;
+
 
 
 function SubPage(props) {
@@ -9,6 +17,10 @@ function SubPage(props) {
   return (
     
         <div className="container">
+
+          <YellowBtn bg="blue">버튼</YellowBtn>
+          <YellowBtn bg="orange">버튼</YellowBtn>
+          
           <div className="row">
             <div className="col-md-6">
               <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
