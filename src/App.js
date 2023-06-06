@@ -17,11 +17,6 @@ function App() {
 
   return (
     <div className="App">
-
-
-
-
-
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="#home">쇼핑몰</Navbar.Brand>
@@ -31,34 +26,24 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
-
-
-
-
       <Routes>
         <Route path='/' element={<MainPage />} />
-
         <Route path='/sub/:id' element={<SubPage shoes={shoes} />} />
-    
-
-        <Route path='/about' element={<About />}> 
+        <Route path='/about' element={<About />}>
           <Route path='member' element={<div>맴버임</div>} />
           <Route path='location' element={<div> 위치 정보임 </div>} />
         </Route>
-
         <Route path='*' element={<div>404 Error</div>} />
-
-        
       </Routes>
 
     </div>
   );
 
-  function About(){
+  function About() {
     return (
       <div>
         <h4>회사정보임</h4>
-        <Outlet></Outlet>
+        <Outlet />
       </div>
     )
   }
@@ -66,7 +51,7 @@ function App() {
   function Card(props) {
     return (
       <div className="col-md-4">
-        <img src={'https://codingapple1.github.io/shop/shoes' + (props.i + 1) + '.jpg'} width="80%" />
+        <img src={`https://codingapple1.github.io/shop/shoes${props.i + 1}.jpg`} width="80%" />
         <h4>{props.shoes.title}</h4>
         <p>{props.shoes.content}</p>
       </div>

@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom"
+import {Container} from "react-bootstrap";
 
 
 function SubPage(props) {
@@ -7,8 +8,7 @@ function SubPage(props) {
 
 
   return (
-    
-        <div className="container">
+        <Container>
           <div className="row">
             <div className="col-md-6">
               <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" />
@@ -20,7 +20,9 @@ function SubPage(props) {
               <button className="btn btn-danger">주문하기</button>
             </div>
           </div>
-        </div>
+        </Container>
   )
 }
+
+
 export { SubPage }
