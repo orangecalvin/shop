@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function SubPage(props) {
-
+  //테스트
   let [count , setCount] = useState(0)
 
   let { id } = useParams();
