@@ -7,12 +7,13 @@ import { useState } from 'react';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import { SubPage } from './routes/Page';
 import userEvent from '@testing-library/user-event';
+import axios from 'axios';
 
 
 
 function App() {
 
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
 
   return (
@@ -65,11 +66,21 @@ function App() {
         <div className="container">
           <div className="row">
             {shoes.map((a, i) => {
-              return (<Card shoes={shoes[i]} i={i} />
+              return (<Card shoes={shoes[i]} i={i} key={i}/>
               )
             })}
           </div>
         </div>
+        <button onClick={() => {
+          axios.get('https://codingapple1.github.io/shop/data2.json')
+          .then((결과) => {
+            console.log(결과.data)
+            let copy = [...shoes, ...결과.data];
+            setShoes(copy);
+          }).catch(() => { console.log('서버 연결 실패');
+          
+        })
+        }}>더보기</button>
       </>
 
 
