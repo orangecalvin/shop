@@ -3,19 +3,22 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 import data from './date.js';
-import { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import { SubPage } from './routes/Page';
-import userEvent from '@testing-library/user-event';
 import axios from 'axios';
+
+export let Context1 = React.createContext();
 
 
 
 function App() {
 
+  
   let [shoes, setShoes] = useState(data);
+  let [재고, 재고변경] = useState([10,11,12]);
   let navigate = useNavigate();
-
+  
   return (
     <div className="App">
       <Navbar bg="dark" variant="dark">
@@ -29,7 +32,11 @@ function App() {
       </Navbar>
       <Routes>
         <Route path='/' element={<MainPage />} />
-        <Route path='/sub/:id' element={<SubPage shoes={shoes} />} />
+        <Route path='/sub/:id' 
+        element={<Context1.Provider value={{ 재고 }}>
+          <SubPage shoes={shoes} />
+          </Context1.Provider>
+          } />
         <Route path='/about' element={<About />}>
           <Route path='member' element={<div>맴버임</div>} />
           <Route path='location' element={<div> 위치 정보임 </div>} />
@@ -86,10 +93,6 @@ function App() {
 
     )
   }
-
-
-
 }
-
 
 export default App;

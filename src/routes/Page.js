@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
+import {Context1} from './../App.js';
+
 
 function SubPage(props) {
-  //테스트
+
+  let {재고} = useContext(Context1)
 
   let [count, setCount] = useState(0);
   let [alert, setAlert] = useState(true);
   let [탭, 탭변경] = useState(0);
+
 
   let { id } = useParams();
   let 찾은상품 = props.shoes.find(function (x) {
@@ -34,6 +38,7 @@ function SubPage(props) {
           : null
       }
       {count}
+      {재고}
       <button onClick={() => { setCount(count + 1) }}>버튼</button>
       <div className="row">
         <div className="col-md-6">
@@ -57,7 +62,7 @@ function SubPage(props) {
             <Nav.Link  onClick={()=>{ 탭변경(2) }} eventKey="link2">버튼2</Nav.Link>
           </Nav.Item>
         </Nav>
-        <TabContent 탭={탭} />
+        <TabContent shoes={props.shoes} 탭={탭} />
         
       
       
@@ -68,9 +73,10 @@ function SubPage(props) {
 }
 
 
-function TabContent({탭}){
+function TabContent({탭, shoes}){
 
   let [fade, setFade] = useState('')
+  let {재고} = useContext(Context1)
 
   useEffect(()=>{
     let a = setTimeout(()=>{setFade('end')}, 100)
@@ -81,7 +87,7 @@ function TabContent({탭}){
   },[탭])
   return (
     <div className={`start ${fade}`}>
-      { [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭] }
+      { [<div>{shoes[0].title}</div>, <div>{재고}</div>, <div>내용2</div>][탭] }
     </div>
   )
 }
