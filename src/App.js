@@ -3,20 +3,21 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 import data from './date.js';
-import React, { createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import { SubPage } from './routes/Page';
+import userEvent from '@testing-library/user-event';
 import axios from 'axios';
+import Cart from './routes/Cart.js'
 
-export let Context1 = React.createContext();
+
 
 
 
 function App() {
 
-  
   let [shoes, setShoes] = useState(data);
-  let [재고, 재고변경] = useState([10,11,12]);
+  let [재고] = useState([10, 11, 12])
   let navigate = useNavigate();
   
   return (
@@ -25,18 +26,19 @@ function App() {
         <Container>
           <Navbar.Brand href="#home">쇼핑몰</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link onClick={() => { navigate('/') }}>Home</Nav.Link>
-            <Nav.Link onClick={() => { navigate('/sub') }}>Card</Nav.Link>
+            <Nav.Link onClick={() => { navigate('/sub') }}>Home</Nav.Link>
+            <Nav.Link onClick={() => { navigate('/cart') }}>Card</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
       <Routes>
         <Route path='/' element={<MainPage />} />
         <Route path='/sub/:id' 
-        element={<Context1.Provider value={{ 재고 }}>
-          <SubPage shoes={shoes} />
-          </Context1.Provider>
-          } />
+        element={
+          <SubPage shoes={shoes} /> } />
+          
+        <Route path='/cart' element={<Cart/>}  />
+
         <Route path='/about' element={<About />}>
           <Route path='member' element={<div>맴버임</div>} />
           <Route path='location' element={<div> 위치 정보임 </div>} />
@@ -93,6 +95,10 @@ function App() {
 
     )
   }
+
+
+
 }
+
 
 export default App;

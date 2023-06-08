@@ -1,17 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
-import {Context1} from './../App.js';
+import { addItem } from "../store.js"
+import { useDispatch } from "react-redux";
+
 
 
 function SubPage(props) {
-
-  let {재고} = useContext(Context1)
+  //테스트
 
   let [count, setCount] = useState(0);
   let [alert, setAlert] = useState(true);
   let [탭, 탭변경] = useState(0);
+  let dispatch = useDispatch();
 
 
   let { id } = useParams();
@@ -38,7 +40,6 @@ function SubPage(props) {
           : null
       }
       {count}
-      {재고}
       <button onClick={() => { setCount(count + 1) }}>버튼</button>
       <div className="row">
         <div className="col-md-6">
@@ -49,7 +50,9 @@ function SubPage(props) {
           <h4 className="pt-5">{찾은상품.title}</h4>
           <p>{찾은상품.content}</p>
           <p>{찾은상품.price}원</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button className="btn btn-danger" onClick={()=>{
+            dispatch(addItem( {id : 1, name : 'Red Knit', count : 1}))
+          }}>주문하기</button>
         </div>
         <Nav variant="tabs" defaultActiveKey="link0">
           <Nav.Item>
@@ -76,7 +79,6 @@ function SubPage(props) {
 function TabContent({탭, shoes}){
 
   let [fade, setFade] = useState('')
-  let {재고} = useContext(Context1)
 
   useEffect(()=>{
     let a = setTimeout(()=>{setFade('end')}, 100)
@@ -87,7 +89,7 @@ function TabContent({탭, shoes}){
   },[탭])
   return (
     <div className={`start ${fade}`}>
-      { [<div>{shoes[0].title}</div>, <div>{재고}</div>, <div>내용2</div>][탭] }
+      { [<div>{shoes[0].title}</div>, <div>내용1</div>, <div>내용2</div>][탭] }
     </div>
   )
 }
