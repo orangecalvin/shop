@@ -8,14 +8,11 @@ import { useDispatch } from "react-redux";
 
 
 function SubPage(props) {
-  //테스트
-
+  
   let [count, setCount] = useState(0);
   let [alert, setAlert] = useState(true);
   let [탭, 탭변경] = useState(0);
   let dispatch = useDispatch();
-
-
   let { id } = useParams();
   let 찾은상품 = props.shoes.find(function (x) {
     return x.id == id
@@ -28,6 +25,14 @@ function SubPage(props) {
     }
   }, [])
 
+  useEffect(()=>{
+    let 꺼낸거 = localStorage.getItem('watched')
+    꺼낸거 = JSON.parse(꺼낸거)
+    꺼낸거.push(찾은상품.id)
+    꺼낸거 = new Set(꺼낸거)
+    꺼낸거 = Array.from(꺼낸거)
+    localStorage.setItem('watched', JSON.stringify(꺼낸거))
+  }, [])
 
 
   return (

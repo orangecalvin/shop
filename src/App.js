@@ -3,8 +3,8 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Navbar, Container, Nav } from 'react-bootstrap';
 import data from './date.js';
-import { createContext, useState } from 'react';
-import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
+import { createContext, useEffect, useState } from 'react';
+import { Routes, Route, Link, useNavigate, Outlet, json } from 'react-router-dom'
 import { SubPage } from './routes/Page';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
@@ -15,6 +15,10 @@ import Cart from './routes/Cart.js'
 
 
 function App() {
+
+  useEffect(()=>{
+    localStorage.setItem('watched', JSON.stringify( [] ))
+  },[])
 
   let [shoes, setShoes] = useState(data);
   let [재고] = useState([10, 11, 12])
