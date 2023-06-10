@@ -103,4 +103,4 @@ function TabContent({탭, shoes}){
 
 
 
-export { SubPage }
+export default SubPage
